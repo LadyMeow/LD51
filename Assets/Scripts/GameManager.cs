@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
                 Destroy(hit.collider.gameObject);
 
                 score += hit.collider.gameObject.GetComponent<Waste>().value;
+                Debug.Log(score);
             }
         }
 
