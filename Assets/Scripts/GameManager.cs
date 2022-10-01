@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
                 SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
 
-                score += 100;
+                score += hit.collider.gameObject.GetComponent<Waste>().value;
             }
         }
 
