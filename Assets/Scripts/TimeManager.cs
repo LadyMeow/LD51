@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
     public float timeValue = 10;
+    public Text timeText;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class TimeManager : MonoBehaviour
             timeValue = 0;
             // or timeValue += 10;
         }
+
+        DisplayTime(timeValue);
     }
 
     void DisplayTime(float timeToDisplay)
@@ -34,5 +38,7 @@ public class TimeManager : MonoBehaviour
         }
 
         float seconds = Mathf.FloorToInt(timeToDisplay);
+
+        timeText.text = string.Format("{0:00}", seconds);
     }
 }
