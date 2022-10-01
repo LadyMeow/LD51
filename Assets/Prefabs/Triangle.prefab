@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 770617586487536757}
   - component: {fileID: 2382369214391528871}
   - component: {fileID: 8944104331722494641}
-  - component: {fileID: 2940598970808837308}
+  - component: {fileID: 2036957074782936294}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -114,7 +114,7 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
---- !u!114 &2940598970808837308
+--- !u!114 &2036957074782936294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6614329115176625893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05e3069404a93643ade71a6ba777eb3, type: 3}
+  m_Script: {fileID: 11500000, guid: b9d17c585e4662c4eba6454b5022870a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 100
