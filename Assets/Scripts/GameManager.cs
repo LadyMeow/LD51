@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("CLICKED " + hit.collider.name);
                 SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
+
+                score += 100;
             }
         }
 
