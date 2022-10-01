@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
             if (hit.collider != null)
             {
                 Debug.Log("CLICKED " + hit.collider.name);
+                SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
             }
         }

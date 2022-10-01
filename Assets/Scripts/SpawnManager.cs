@@ -2,29 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpawnManager : MonoBehaviour
 {
-    public List<GameObject> wasteObjects;
+    public List<GameObject> wasteObjectTypes;
     private List<Vector3> randomPositions;
+    private float speed = 1;
+
+    public static List<GameObject> wasteObjects;
 
     // Start is called before the first frame update
     void Start()
     {
         randomPositions = new List<Vector3>(3);
+        wasteObjects = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Instantiate(wasteObjects[0], CreateRandomPosition(), Quaternion.identity);
-
+        if (TimeManager.timeValue > 0)
+        {
+            if (speed > 0)
+            {
+                speed -= Time.deltaTime;
+            }
+            else if (speed <= 0)
+            {
+                wasteObjects.Add(Instantiate(wasteObjectTypes[0], CreateRandomPosition(), Quaternion.identity));
+                speed = 1;
+            }
+        }
     }
 
     // instantiate
 
-    // create random Postions
+    // create random Postionsa
     Vector3 CreateRandomPosition()
     {
         List<int> xPositions = new List<int> { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };

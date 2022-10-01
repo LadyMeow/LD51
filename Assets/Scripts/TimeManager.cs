@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public float timeValue = 10;
+    public static float timeValue = 10;
     public TextMeshProUGUI timeText;
 
     // Start is called before the first frame update
@@ -46,6 +46,6 @@ public class TimeManager : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay);
         float milliseconds = timeToDisplay % 1 * 1000;
 
-        timeText.text = string.Format("{0:00}:{1:000}", seconds, milliseconds);
+        //timeText.text = string.Format("{0:00}:{1:000}", seconds, milliseconds);
     }
 }
