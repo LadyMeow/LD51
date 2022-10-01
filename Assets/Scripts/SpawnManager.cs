@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> wasteObjectTypes;
     private List<Vector3> randomPositions;
-    private float speed = 1;
+    public float SpawnSpeed = 1f;
 
     public static List<GameObject> wasteObjects;
 
@@ -24,14 +24,14 @@ public class SpawnManager : MonoBehaviour
     {
         if (TimeManager.timeValue > 0)
         {
-            if (speed > 0)
+            if (SpawnSpeed > 0)
             {
-                speed -= Time.deltaTime;
+                SpawnSpeed -= Time.deltaTime;
             }
-            else if (speed <= 0)
+            else if (SpawnSpeed <= 0)
             {
                 wasteObjects.Add(Instantiate(wasteObjectTypes[0], CreateRandomPosition(), Quaternion.identity));
-                speed = 1;
+                SpawnSpeed = 1;
             }
         }
     }

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public float FallingSpeed = 5f;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 165;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +32,10 @@ public class GameManager : MonoBehaviour
                 Destroy(hit.collider.gameObject);
             }
         }
+
+        foreach (var waste in SpawnManager.wasteObjects)
+        {
+            waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);
+        }
     }
-
-
 }
