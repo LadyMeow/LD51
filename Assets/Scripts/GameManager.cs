@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static int score = 0;
+    
     public float FallingSpeed = 5f;
 
     private void Awake()
     {
         Application.targetFrameRate = 165;
     }
+    
 
     // Start is called before the first frame update
     void Start()
