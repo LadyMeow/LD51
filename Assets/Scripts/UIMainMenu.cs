@@ -29,7 +29,7 @@ public class UIMainMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (CanvasHighscores.enabled) ButtonHighscoreBackClick();
+            if (CanvasHighscores.isActiveAndEnabled || CanvasOptions.isActiveAndEnabled) ButtonBackClick();
         }
     }
 
@@ -50,12 +50,17 @@ public class UIMainMenu : MonoBehaviour
     public void ButtonHighscoresClick()
     {
         CanvasMain.gameObject.SetActive(false);
+        CanvasOptions.gameObject.SetActive(false);
+
         CanvasHighscores.gameObject.SetActive(true);
     }
 
     public void ButtonOptionsClick()
     {
+        CanvasMain.gameObject.SetActive(false);
+        CanvasHighscores.gameObject.SetActive(false);
 
+        CanvasOptions.gameObject.SetActive(true);
     }
 
     public void ButtonQuitClick()
@@ -63,9 +68,11 @@ public class UIMainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void ButtonHighscoreBackClick()
+    public void ButtonBackClick()
     {
-        CanvasMain.gameObject.SetActive(true);
         CanvasHighscores.gameObject.SetActive(false);
+        CanvasOptions.gameObject.SetActive(false);
+
+        CanvasMain.gameObject.SetActive(true);
     }
 }

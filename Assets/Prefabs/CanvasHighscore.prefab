@@ -637,7 +637,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainMenu, Assembly-CSharp
-        m_MethodName: ButtonHighscoreBackClick
+        m_MethodName: ButtonBackClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
