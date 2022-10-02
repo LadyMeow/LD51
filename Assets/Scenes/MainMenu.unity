@@ -804,18 +804,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 518313628, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 793757009}
-    - target: {fileID: 1276497343, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1043,22 +1035,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 5913112479449198439, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0.9882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 5913112479449198439, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
-      propertyPath: m_fontColor.g
-      value: 0.6509804
-      objectReference: {fileID: 0}
-    - target: {fileID: 5913112479449198439, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0.07058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 5913112479449198439, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294747666
-      objectReference: {fileID: 0}
     - target: {fileID: 5913112480412182964, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

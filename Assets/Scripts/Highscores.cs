@@ -9,6 +9,7 @@ public class Highscores : MonoBehaviour
     public List<TextMeshProUGUI> LocalHighscoreLabels;
 
     public GameObject NewHighscoreArea;
+    public TextMeshProUGUI NewHighScoreValueLabel;
 
     private List<int> _localHighscoreValues = new List<int>();
     private List<string> _localHighscoreNames = new List<string>();
@@ -31,6 +32,7 @@ public class Highscores : MonoBehaviour
 
         if (GameManager.Score > 0 && !_localHighscoreValues.TrueForAll(s => GameManager.Score < s))
         {
+            NewHighScoreValueLabel.text = GameManager.Score.ToString();
             NewHighscoreArea.SetActive(true);
         }
         else
@@ -44,13 +46,13 @@ public class Highscores : MonoBehaviour
         // Retrieve Highscore from local cache
         _localHighscoreValues.Clear();
         _localHighscoreValues.Add(PlayerPrefs.GetInt("Highscore", -1));
+        _localHighscoreValues.Add(PlayerPrefs.GetInt("Highscore1", -1));
         _localHighscoreValues.Add(PlayerPrefs.GetInt("Highscore2", -1));
-        _localHighscoreValues.Add(PlayerPrefs.GetInt("Highscore3", -1));
 
         _localHighscoreNames.Clear();
         _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName", ""));
+        _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName1", ""));
         _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName2", ""));
-        _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName3", ""));
 
         // Clear all local híghscores
         LocalHighscoreLabels.ForEach(l => l.text = "");
