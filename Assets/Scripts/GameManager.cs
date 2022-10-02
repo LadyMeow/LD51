@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
                 Debug.Log("CLICKED " + hit.collider.name);
                 SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
                 Destroy(hit.collider.gameObject);
+
+                score += hit.collider.gameObject.GetComponent<Waste>().value;
+                Debug.Log(score);
             }
         }
 
