@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class GameManager : MonoBehaviour
     public static KeyCode KeyCircle = KeyCode.A;
     public static KeyCode KeyTriangle = KeyCode.S;
     public static KeyCode KeySquare = KeyCode.D;
+    private WasteTypes activeType;
+    public enum WasteTypes
+    {
+        CIRCLE,
+        TRIANGLE,
+        SQUARE,
+        XWASTE
+    }
 
     public Texture2D cursor;
     public Texture2D cursorGlow;
@@ -51,7 +60,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
+
             // if color selection ?
+
             List<GameObject> itemsInReach = new List<GameObject>();
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
@@ -59,7 +70,10 @@ public class GameManager : MonoBehaviour
             {
                 if (Vector3.Distance(mousePosition, item.transform.position) < 0.7)
                 {
-                    itemsInReach.Add(item);
+                    if (item.GetComponent<Waste>().type == activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
+                    {
+                        itemsInReach.Add(item);
+                    }
                 }
             }
 
@@ -82,6 +96,20 @@ public class GameManager : MonoBehaviour
         else
         {
             Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        }
+
+        // KEY STATUS - ACTIVE TYPE
+        if (Input.GetKeyDown(KeyCircle))
+        {
+            activeType = WasteTypes.CIRCLE;
+        }
+        if (Input.GetKeyDown(KeySquare))
+        {
+            activeType = WasteTypes.SQUARE;
+        }
+        if (Input.GetKeyDown(KeyTriangle))
+        {
+            activeType = WasteTypes.TRIANGLE;
         }
 
         // MOVEMENT
