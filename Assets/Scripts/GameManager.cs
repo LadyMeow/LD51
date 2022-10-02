@@ -24,22 +24,30 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+        //    if (hit.collider != null)
+        //    {
+        //        Debug.Log("CLICKED " + hit.collider.name);
+        //        SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
+        //        Destroy(hit.collider.gameObject);
+
+        //        score += hit.collider.gameObject.GetComponent<Waste>().value;
+        //        Debug.Log(score);
+        //    }
+        //}
+
+        // COLLECT ON MOUSE BUTTON
+        if(Input.GetMouseButton(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit.collider != null)
-            {
-                Debug.Log("CLICKED " + hit.collider.name);
-                SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
-                Destroy(hit.collider.gameObject);
-
-                score += hit.collider.gameObject.GetComponent<Waste>().value;
-                Debug.Log(score);
-            }
         }
 
+
+        // MOVEMENT
         foreach (var waste in SpawnManager.wasteObjects)
         {
             waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);

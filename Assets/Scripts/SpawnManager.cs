@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
 
                 if (notOccupied)
                 {
-                    temp.transform.SetPositionAndRotation(pos, Quaternion.identity);
+                    temp.transform.SetPositionAndRotation(pos, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                     posSet = true;
                     wasteObjects.Add(temp);
                     tempWasteList.Remove(temp);
