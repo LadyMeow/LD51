@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static int score = 0;
     
-    public float FallingSpeed = 5f;
+    public static float FallingSpeed = 5f;
 
     private void Awake()
     {

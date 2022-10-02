@@ -8,60 +8,53 @@ public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> wasteObjectTypes;
     private List<Vector3> randomPositions;
-    public float SpawnSpeed = 1f;
+
+    private int XWasteRatio = 3;
+    private int GoodWasteSize = 10;
 
     public static List<GameObject> wasteObjects;
+
+
+    public int width = 100;
+    public int length = 0; // z
+    public int height = 100;
+    public int step = 2;
+    public int randomFactor = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         randomPositions = new List<Vector3>(3);
         wasteObjects = new List<GameObject>();
+
+        // wasteObjects.Add(Instantiate(wasteObjectTypes[3], CreateRandomPosition(), Quaternion.identity));
+
+        for (int h = 0; h < length / step; h++)
+        {
+            for (int i = 0; i < width / step; i++)
+            {
+                int canSpawn = Random.Range(0, randomFactor);
+                if (canSpawn == 0)
+                {
+                    wasteObjects.Add(Instantiate(wasteObjectTypes[0], new Vector3(((i * step) + transform.position.x) - (width / 2), transform.position.y + (Random.Range(-(height / 2), (height / 2))), ((h * step) + transform.position.z) - (length / 2)), Quaternion.identity));
+                }
+            }
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TimeManager.timeValue > 0)
-        {
-            if (SpawnSpeed > 0)
-            {
-                SpawnSpeed -= Time.deltaTime;
-            }
-            else if (SpawnSpeed <= 0)
-            {
-                wasteObjects.Add(Instantiate(wasteObjectTypes[0], CreateRandomPosition(), Quaternion.identity));
-                SpawnSpeed = 1;
-            }
-        }
+
     }
 
     // instantiate
 
-    // create random Postionsa
-    Vector3 CreateRandomPosition()
-    {
-        List<int> xPositions = new List<int> { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
-
-        int x = xPositions[Random.Range(0, 10)];
-
-        while (randomPositions.Any(p => p.x == x))
-        {
-            x = xPositions[Random.Range(0, 10)];
-        }
-
-        float y = 5.5f;
-        int z = 0;
-
-        Vector3 pos = new Vector3(x, y, z);
-
-        if (randomPositions.Count == 3)
-        {
-            randomPositions.RemoveAt(0);
-        }
-        randomPositions.Add(pos);
-
-        return pos;
-    }
+    // create random Positions
+    // Vector3 CreateRandomPosition()
+    // {
+    //     return new Vector3(0, 0, 0);
+    // }
 
 }
