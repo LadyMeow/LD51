@@ -21,6 +21,7 @@ public class UIMainMenu : MonoBehaviour
 
     // Could be in the Options Script but we need the check for the Escape Key here
     private int _listenForKeyWithType = 0;
+    private bool _init = true;
 
     private void Awake()
     {
@@ -33,12 +34,27 @@ public class UIMainMenu : MonoBehaviour
         // Just in case
         if (MouseLight == null) MouseLight = GetComponentInChildren<Light2D>().transform;
 
-        CanvasHighscores.gameObject.SetActive(false);
-        CanvasOptions.gameObject.SetActive(false);
+        if (_init)
+        {
+            _init = false;
 
-        GameManager.KeyCircle = (KeyCode)PlayerPrefs.GetInt("KeyCircle", (int)KeyCode.A);
-        GameManager.KeyTriangle = (KeyCode)PlayerPrefs.GetInt("KeyTriangle", (int)KeyCode.S);
-        GameManager.KeySquare = (KeyCode)PlayerPrefs.GetInt("KeySquare", (int)KeyCode.D);
+            CanvasHighscores.gameObject.SetActive(false);
+            CanvasOptions.gameObject.SetActive(false);
+
+            CanvasMain.gameObject.SetActive(true);
+
+            GameManager.KeyCircle = (KeyCode)PlayerPrefs.GetInt("KeyCircle", (int)KeyCode.A);
+            GameManager.KeyTriangle = (KeyCode)PlayerPrefs.GetInt("KeyTriangle", (int)KeyCode.S);
+            GameManager.KeySquare = (KeyCode)PlayerPrefs.GetInt("KeySquare", (int)KeyCode.D);
+        }
+        else
+        {
+            CanvasMain.gameObject.SetActive(false);
+            CanvasOptions.gameObject.SetActive(false);
+
+            CanvasHighscores.gameObject.SetActive(true);
+        }
+
 
         UpdateOptionsControlButtons();
     }

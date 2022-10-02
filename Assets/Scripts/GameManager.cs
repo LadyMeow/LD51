@@ -4,10 +4,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
     public static float FallingSpeed = 5f;
+    private static int Score = 0;
 
     public static KeyCode KeyCircle = KeyCode.A;
     public static KeyCode KeyTriangle = KeyCode.S;
@@ -18,20 +21,33 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI ScoreLabel;
 
-    private int _score = 0;
+
     private float _glowTime = 0f;
     private float _maxGlowTime = 0.08f;
+
+    private TimeManager timer;
 
     // Start is called before the first frame update
     void Start()
     {
+        Score = 0; // Reset Score
+
+        timer = GetComponent<TimeManager>();
+
         Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+
         UpdateScoreLabel();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Run finished
+        if (timer.MaxRunTimeInSeconds <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+
         if (Input.GetMouseButton(0))
         {
             // if color selection ?
@@ -54,7 +70,7 @@ public class GameManager : MonoBehaviour
 
                     _glowTime = _maxGlowTime;
 
-                    _score += reachedItem.GetComponent<Waste>().value;
+                    Score += reachedItem.GetComponent<Waste>().value;
 
                     UpdateScoreLabel();
 
@@ -77,6 +93,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScoreLabel()
     {
-        if (ScoreLabel != null) ScoreLabel.text = "Score: " + _score;
+        if (ScoreLabel != null) ScoreLabel.text = "Score: " + Score;
     }
 }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
-    public static float timeValue = 10;
+    public float MaxRunTimeInSeconds = 10;
     public TextMeshProUGUI timeText;
 
     // Start is called before the first frame update
@@ -17,17 +18,10 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeValue > 0)
+        if (MaxRunTimeInSeconds > 0)
         {
-            timeValue -= Time.deltaTime;
+            MaxRunTimeInSeconds -= Time.deltaTime;
         }
-        else
-        {
-            timeValue = 0;
-            // or timeValue += 10;
-        }
-
-        DisplayTime(timeValue);
     }
 
     void DisplayTime(float timeToDisplay)
