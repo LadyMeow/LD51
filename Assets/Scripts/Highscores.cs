@@ -11,9 +11,17 @@ public class Highscores : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("Highscore", 9000);
-        PlayerPrefs.SetString("HighscoreName", "Busen");
+        UpdateLocalHighscores();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void UpdateLocalHighscores()
+    {
         // Retrieve Highscore from local cache
         List<int> localHighscoreValues = new List<int>();
 
@@ -27,32 +35,21 @@ public class Highscores : MonoBehaviour
         localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName2", ""));
         localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName3", ""));
 
-        UpdateLocalHighscores(localHighscoreValues, localHighscoreNames);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void UpdateLocalHighscores(List<int> highscoreValues, List<string> highscoreNames)
-    {
         // Clear all local híghscores
         LocalHighscoreLabels.ForEach(l => l.text = "");
 
         // Check just in case
         if (LocalHighscoreLabels != null)
         {
-            for (int i = 0; i < highscoreValues.Count; i++)
+            for (int i = 0; i < localHighscoreValues.Count; i++)
             {
-                if (LocalHighscoreLabels.Count > i && highscoreValues[i] != -1 && highscoreNames[i] != "")
+                if (LocalHighscoreLabels.Count > i && localHighscoreValues[i] != -1 && localHighscoreNames[i] != "")
                 {
-                    int nameLength = highscoreNames[i].Length;
-                    int valueLength = highscoreValues[i].ToString().Length;
+                    int nameLength = localHighscoreNames[i].Length;
+                    int valueLength = localHighscoreValues[i].ToString().Length;
 
                     // Minimum of one space
-                    LocalHighscoreLabels[i].text = highscoreNames[i] + new string(' ', Mathf.Max(1, 40 - nameLength - valueLength)) + highscoreValues[i];
+                    LocalHighscoreLabels[i].text = localHighscoreNames[i] + new string(' ', Mathf.Max(1, 40 - nameLength - valueLength)) + localHighscoreValues[i];
                 }
             }
         }
@@ -60,6 +57,8 @@ public class Highscores : MonoBehaviour
 
     public static void StoreLocalHighscore(int localHighscore)
     {
-
+        if (localHighscore > PlayerPrefs.GetInt("Highscore", -1)) PlayerPrefs.SetInt("Highscore", localHighscore);
+        else if (localHighscore > PlayerPrefs.GetInt("Highscore1", -1)) PlayerPrefs.SetInt("Highscore1", localHighscore);
+        else if (localHighscore > PlayerPrefs.GetInt("Highscore2", -1)) PlayerPrefs.SetInt("Highscore2", localHighscore);
     }
 }
