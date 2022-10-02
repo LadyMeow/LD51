@@ -10,6 +10,14 @@ public class GameManager : MonoBehaviour
 
     public static float FallingSpeed = 5f;
 
+    public static KeyCode KeySquare = KeyCode.S;
+    public static KeyCode KeyTriangle = KeyCode.D;
+    public static KeyCode KeyCircle = KeyCode.A;
+
+    public Texture2D cursor;
+    public Texture2D cursorGlow;
+    private float glowTime = 0f;
+
     private void Awake()
     {
         Application.targetFrameRate = 165;
@@ -19,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
     }
 
     // Update is called once per frame
@@ -50,7 +58,7 @@ public class GameManager : MonoBehaviour
 
             foreach (GameObject item in SpawnManager.wasteObjects)
             {
-                if (Vector3.Distance(mousePosition, item.transform.position) < 1)
+                if (Vector3.Distance(mousePosition, item.transform.position) < 0.7)
                 {
                     itemsInReach.Add(item);
                 }
@@ -60,6 +68,8 @@ public class GameManager : MonoBehaviour
             {
                 foreach (GameObject reachedItem in itemsInReach)
                 {
+                    Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
+                    glowTime = 0.08f;
                     score += reachedItem.GetComponent<Waste>().value;
                     Debug.Log(score);
 
@@ -71,6 +81,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (glowTime > 0) glowTime -= Time.deltaTime;
+        else if (glowTime <= 0) Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
 
         // MOVEMENT
         foreach (var waste in SpawnManager.wasteObjects)
