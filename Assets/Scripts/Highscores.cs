@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Highscores : MonoBehaviour
@@ -30,7 +31,7 @@ public class Highscores : MonoBehaviour
     {
         UpdateLocalHighscores();
 
-        if (GameManager.Score > 0 && !_localHighscoreValues.TrueForAll(s => GameManager.Score < s))
+        if (GameManager.Score > 0 && GameManager.Score > _localHighscoreValues.FirstOrDefault())
         {
             NewHighScoreValueLabel.text = GameManager.Score.ToString();
             NewHighscoreArea.SetActive(true);
@@ -78,18 +79,32 @@ public class Highscores : MonoBehaviour
     {
         if (localHighscore > _localHighscoreValues[0])
         {
+            // Move old highscores
+            PlayerPrefs.SetInt("Highscore2", _localHighscoreValues[1]);
+            PlayerPrefs.SetString("HighscoreName2", _localHighscoreNames[1]);
+
+            PlayerPrefs.SetInt("Highscore1", _localHighscoreValues[0]);
+            PlayerPrefs.SetString("HighscoreName1", _localHighscoreNames[0]);
+
+            // Set new highscore
             PlayerPrefs.SetInt("Highscore", localHighscore);
             PlayerPrefs.SetString("HighscoreName", name);
         }
         else if (localHighscore > _localHighscoreValues[1])
         {
+            // Move old highscores
+            PlayerPrefs.SetInt("Highscore2", _localHighscoreValues[1]);
+            PlayerPrefs.SetString("HighscoreName2", _localHighscoreNames[1]);
+
+            // Set new highscore
             PlayerPrefs.SetInt("Highscore1", localHighscore);
             PlayerPrefs.SetString("HighscoreName1", name);
         }
         else if (localHighscore > _localHighscoreValues[2])
         {
+            // Set new highscore
             PlayerPrefs.SetInt("Highscore2", localHighscore);
-            PlayerPrefs.SetString("HighscoreNam2", name);
+            PlayerPrefs.SetString("HighscoreName2", name);
         }
     }
 
