@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
             // if color selection ?
             List<GameObject> itemsInReach = new List<GameObject>();
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
@@ -66,8 +67,6 @@ public class GameManager : MonoBehaviour
             {
                 foreach (GameObject reachedItem in itemsInReach)
                 {
-                    Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
-
                     _glowTime = _maxGlowTime;
 
                     Score += reachedItem.GetComponent<Waste>().value;
@@ -80,9 +79,10 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-        if (_glowTime > 0) _glowTime -= Time.deltaTime;
-        else if (_glowTime <= 0) Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        else
+        {
+            Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        }
 
         // MOVEMENT
         foreach (var waste in SpawnManager.wasteObjects)
