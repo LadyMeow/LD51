@@ -6,13 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
+    public static int LocalHighscore;
+
     public Transform MouseLight;
+
+    public Canvas CanvasMain;
+    public Canvas CanvasHighscores;
+    public Canvas CanvasOptions;
 
     // Start is called before the first frame update
     void Start()
     {
         // Just in case
         if (MouseLight == null) MouseLight = GetComponentInChildren<Light2D>().transform;
+
+        // Retrieve Highscore from local cache
+        LocalHighscore = PlayerPrefs.GetInt("Highscore", -1);
     }
 
     // Update is called once per frame
@@ -48,5 +57,10 @@ public class UIMainMenu : MonoBehaviour
     public void ButtonQuitClick()
     {
         Application.Quit();
+    }
+
+    public void ButtonHighscoreBackClick()
+    {
+
     }
 }
