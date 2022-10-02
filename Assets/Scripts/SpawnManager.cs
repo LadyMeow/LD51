@@ -9,17 +9,11 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> wasteObjectTypes;
     private List<Vector3> randomPositions;
 
-    private int XWasteRatio = 3;
-    private int GoodWasteSize = 10;
+    private int XWasteFactor = 5;
+    private int GoodWasteSize = 20;
 
     public static List<GameObject> wasteObjects;
 
-
-    public int width = 100;
-    public int length = 0; // z
-    public int height = 100;
-    public int step = 2;
-    public int randomFactor = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -27,17 +21,52 @@ public class SpawnManager : MonoBehaviour
         randomPositions = new List<Vector3>(3);
         wasteObjects = new List<GameObject>();
 
-        // wasteObjects.Add(Instantiate(wasteObjectTypes[3], CreateRandomPosition(), Quaternion.identity));
+        List<GameObject> tempWasteList = new List<GameObject>();
 
-        for (int h = 0; h < length / step; h++)
+        for (int i = 0; i < GoodWasteSize; i++)
         {
-            for (int i = 0; i < width / step; i++)
+            for (int j = 0; j <= 3; j++)
             {
-                int canSpawn = Random.Range(0, randomFactor);
-                if (canSpawn == 0)
+                if (j == 3)
                 {
-                    wasteObjects.Add(Instantiate(wasteObjectTypes[0], new Vector3(((i * step) + transform.position.x) - (width / 2), transform.position.y + (Random.Range(-(height / 2), (height / 2))), ((h * step) + transform.position.z) - (length / 2)), Quaternion.identity));
+                    for (int f = 0; f < XWasteFactor; f++)
+                    {
+                        tempWasteList.Add(Instantiate(wasteObjectTypes[j]));
+                    }
                 }
+                else
+                {
+                    tempWasteList.Add(Instantiate(wasteObjectTypes[j]));
+                }
+            }
+        }
+
+        float Xmin = -9f;
+        float Xmax = 9f;
+        float Ymin = 5.5f;
+        float Ymax = 6.5f;
+        int count = tempWasteList.Count;
+
+
+        for (int i = 0; i < count; i++)
+        {
+            bool posSet = false;
+            GameObject temp = tempWasteList[Random.Range(0, tempWasteList.Count)];
+
+            while (!posSet)
+            {
+                Vector3 pos = new Vector3(Random.Range(Xmin, Xmax), Random.Range(Ymin, Ymax) + (i * GameManager.FallingSpeed / 10), 0);
+
+                bool notOccupied = wasteObjects.TakeLast(10).ToList().TrueForAll(w => Vector3.Distance(w.transform.position, pos) > 1);
+
+                if (notOccupied)
+                {
+                    temp.transform.SetPositionAndRotation(pos, Quaternion.identity);
+                    posSet = true;
+                    wasteObjects.Add(temp);
+                    tempWasteList.Remove(temp);
+                }
+
             }
         }
 
@@ -48,8 +77,6 @@ public class SpawnManager : MonoBehaviour
     {
 
     }
-
-    // instantiate
 
     // create random Positions
     // Vector3 CreateRandomPosition()
