@@ -869,6 +869,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 545356785, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 545356785, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8120745309333010550, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1169202194, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1169202194, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8120745309333010550, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1176487344, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1176487344, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8120745309333010550, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1554581202, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
+    - target: {fileID: 1554581202, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8120745309333010550, guid: fa0954f7708d78e48b44d68b27f011c7, type: 2}
     - target: {fileID: 6046904319069652415, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
