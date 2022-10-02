@@ -29,4 +29,19 @@ public class UIMainMenu : MonoBehaviour
     {
         Debug.Log("Start Button here!");
     }
+
+    public void ButtonHighscoresClick()
+    {
+
+    }
+
+    public void ButtonOptionsClick()
+    {
+
+    }
+
+    public void ButtonQuitClick()
+    {
+
+    }
 }
