@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
@@ -12,6 +15,11 @@ public class UIMainMenu : MonoBehaviour
     public Canvas CanvasHighscores;
     public Canvas CanvasOptions;
 
+    public GameObject ButtonKeyCircle;
+    public GameObject ButtonKeyTriangle;
+    public GameObject ButtonKeySquare;
+
+    // Could be in the Options Script but we need the check for the Escape Key here
     private int _listenForKeyWithType = 0;
 
     // Start is called before the first frame update
@@ -31,8 +39,15 @@ public class UIMainMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_listenForKeyWithType > 0) _listenForKeyWithType = 0;
-            else if (CanvasHighscores.isActiveAndEnabled || CanvasOptions.isActiveAndEnabled) ButtonBackClick();
+            // Block Escape if Control Remapping is active
+            if (_listenForKeyWithType > 0)
+            {
+                _listenForKeyWithType = 0;
+            }
+            else if (CanvasHighscores.isActiveAndEnabled || CanvasOptions.isActiveAndEnabled)
+            {
+                ButtonBackClick();
+            }
         }
     }
 
@@ -100,19 +115,24 @@ public class UIMainMenu : MonoBehaviour
             {
                 case 1:
                     GameManager.KeyCircle = e.keyCode;
+                    ButtonKeyCircle.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
                     break;
 
                 case 2:
-                    GameManager.KeySquare = e.keyCode;
+                    GameManager.KeyTriangle = e.keyCode;
+                    ButtonKeyTriangle.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
                     break;
 
                 case 3:
-                    GameManager.KeyTriangle = e.keyCode;
+                    GameManager.KeySquare = e.keyCode;
+                    ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
                     break;
 
                 default:
                     break;
             }
+
+            EventSystem.current.SetSelectedGameObject(null);
 
             Debug.Log("Key set for " + _listenForKeyWithType + " to: " + e.keyCode);
 

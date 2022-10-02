@@ -156,6 +156,9 @@ MonoBehaviour:
   CanvasMain: {fileID: 1522057843}
   CanvasHighscores: {fileID: 1487542869}
   CanvasOptions: {fileID: 2137150582}
+  ButtonKeyCircle: {fileID: 1322420211}
+  ButtonKeyTriangle: {fileID: 1766896083}
+  ButtonKeySquare: {fileID: 485552645}
 --- !u!4 &20105434
 Transform:
   m_ObjectHideFlags: 0
@@ -221,6 +224,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &485552645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 155691992, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+  m_PrefabInstance: {fileID: 1358668669887450161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +764,11 @@ Transform:
   m_Father: {fileID: 950742099}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1322420211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1642389742, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+  m_PrefabInstance: {fileID: 1358668669887450161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &1487542869 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 6046904320207994510, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
@@ -765,6 +778,11 @@ Canvas:
 Canvas:
   m_CorrespondingSourceObject: {fileID: 5913112480509900838, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
   m_PrefabInstance: {fileID: 5913112479438795258}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1766896083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1971498916, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+  m_PrefabInstance: {fileID: 1358668669887450161}
   m_PrefabAsset: {fileID: 0}
 --- !u!223 &2137150582 stripped
 Canvas:
@@ -782,162 +800,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 155691993, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartChangeButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIMainMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 155691994, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 518313628, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 730064175, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_Name
-      value: Label Graphics
-      objectReference: {fileID: 0}
-    - target: {fileID: 730064177, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_text
-      value: 'Graphics:'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 793757009}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetMasterVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: AudioManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068582764, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1276497343, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1563100447, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_Name
-      value: Label Volume
-      objectReference: {fileID: 0}
-    - target: {fileID: 1563100449, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_text
-      value: 'Volume:'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389743, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartChangeButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIMainMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642389744, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498917, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartChangeButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIMainMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971498918, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1358668668400719938, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_Name
       value: CanvasOptions
