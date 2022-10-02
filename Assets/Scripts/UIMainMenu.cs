@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
-    public static int LocalHighscore;
-
     public Transform MouseLight;
 
     public Canvas CanvasMain;
@@ -20,14 +18,19 @@ public class UIMainMenu : MonoBehaviour
         // Just in case
         if (MouseLight == null) MouseLight = GetComponentInChildren<Light2D>().transform;
 
-        // Retrieve Highscore from local cache
-        LocalHighscore = PlayerPrefs.GetInt("Highscore", -1);
+        CanvasHighscores.gameObject.SetActive(false);
+        CanvasOptions.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveMouseLight();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (CanvasHighscores.enabled) ButtonHighscoreBackClick();
+        }
     }
 
     void MoveMouseLight()
@@ -46,7 +49,8 @@ public class UIMainMenu : MonoBehaviour
 
     public void ButtonHighscoresClick()
     {
-
+        CanvasMain.gameObject.SetActive(false);
+        CanvasHighscores.gameObject.SetActive(true);
     }
 
     public void ButtonOptionsClick()
@@ -61,6 +65,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void ButtonHighscoreBackClick()
     {
-
+        CanvasMain.gameObject.SetActive(true);
+        CanvasHighscores.gameObject.SetActive(false);
     }
 }
