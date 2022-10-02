@@ -60,13 +60,13 @@ public class GameManager : MonoBehaviour
             {
                 foreach (GameObject reachedItem in itemsInReach)
                 {
-                score += reachedItem.GetComponent<Waste>().value;
-                Debug.Log(score);
+                    score += reachedItem.GetComponent<Waste>().value;
+                    Debug.Log(score);
 
-                SpawnManager.wasteObjects.Remove(reachedItem);
-                
-                // add Animation ?
-                Destroy(reachedItem);
+                    SpawnManager.wasteObjects.Remove(reachedItem);
+
+                    // add Animation ?
+                    Destroy(reachedItem);
                 }
             }
         }
