@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
-    public static int LocalHighscore;
-
     public Transform MouseLight;
 
     public Canvas CanvasMain;
@@ -19,9 +17,6 @@ public class UIMainMenu : MonoBehaviour
     {
         // Just in case
         if (MouseLight == null) MouseLight = GetComponentInChildren<Light2D>().transform;
-
-        // Retrieve Highscore from local cache
-        LocalHighscore = PlayerPrefs.GetInt("Highscore", -1);
     }
 
     // Update is called once per frame

@@ -768,6 +768,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasMainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5913112480509900835, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5913112480509900838, guid: 7c1a891a43d084d4d98138aa58825f1a, type: 3}
       propertyPath: m_Camera
       value: 
