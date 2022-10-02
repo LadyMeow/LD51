@@ -10,7 +10,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameManager : MonoBehaviour
 {
     public static float FallingSpeed = 5f;
-    private static int Score = 0;
+    public static int Score = 0;
 
     public static KeyCode KeyCircle = KeyCode.A;
     public static KeyCode KeyTriangle = KeyCode.S;

@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
+    private static bool _init = true;
+
     public Transform MouseLight;
 
     public Canvas CanvasMain;
@@ -21,7 +23,6 @@ public class UIMainMenu : MonoBehaviour
 
     // Could be in the Options Script but we need the check for the Escape Key here
     private int _listenForKeyWithType = 0;
-    private bool _init = true;
 
     private void Awake()
     {
