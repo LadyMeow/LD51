@@ -1,55 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int score = 0;
-
     public static float FallingSpeed = 5f;
 
-    public static KeyCode KeySquare = KeyCode.S;
-    public static KeyCode KeyTriangle = KeyCode.D;
     public static KeyCode KeyCircle = KeyCode.A;
+    public static KeyCode KeyTriangle = KeyCode.S;
+    public static KeyCode KeySquare = KeyCode.D;
 
     public Texture2D cursor;
     public Texture2D cursorGlow;
-    private float glowTime = 0f;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 165;
-    }
+    public TextMeshProUGUI ScoreLabel;
 
+    private int _score = 0;
+    private float _glowTime = 0f;
+    private float _maxGlowTime = 0.08f;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        UpdateScoreLabel();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-        //    if (hit.collider != null)
-        //    {
-        //        Debug.Log("CLICKED " + hit.collider.name);
-        //        SpawnManager.wasteObjects.Remove(hit.collider.gameObject);
-        //        Destroy(hit.collider.gameObject);
-
-        //        score += hit.collider.gameObject.GetComponent<Waste>().value;
-        //        Debug.Log(score);
-        //    }
-        //}
-
-        // COLLECT ON MOUSE BUTTON
         if (Input.GetMouseButton(0))
         {
             // if color selection ?
@@ -69,25 +51,32 @@ public class GameManager : MonoBehaviour
                 foreach (GameObject reachedItem in itemsInReach)
                 {
                     Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
-                    glowTime = 0.08f;
-                    score += reachedItem.GetComponent<Waste>().value;
-                    Debug.Log(score);
+
+                    _glowTime = _maxGlowTime;
+
+                    _score += reachedItem.GetComponent<Waste>().value;
+
+                    UpdateScoreLabel();
 
                     SpawnManager.wasteObjects.Remove(reachedItem);
 
-                    // add Animation ?
                     Destroy(reachedItem);
                 }
             }
         }
 
-        if (glowTime > 0) glowTime -= Time.deltaTime;
-        else if (glowTime <= 0) Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        if (_glowTime > 0) _glowTime -= Time.deltaTime;
+        else if (_glowTime <= 0) Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
 
         // MOVEMENT
         foreach (var waste in SpawnManager.wasteObjects)
         {
             waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);
         }
+    }
+
+    private void UpdateScoreLabel()
+    {
+        if (ScoreLabel != null) ScoreLabel.text = "Score: " + _score;
     }
 }

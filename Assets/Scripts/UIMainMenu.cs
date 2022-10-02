@@ -22,6 +22,11 @@ public class UIMainMenu : MonoBehaviour
     // Could be in the Options Script but we need the check for the Escape Key here
     private int _listenForKeyWithType = 0;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 165;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +35,12 @@ public class UIMainMenu : MonoBehaviour
 
         CanvasHighscores.gameObject.SetActive(false);
         CanvasOptions.gameObject.SetActive(false);
+
+        GameManager.KeyCircle = (KeyCode)PlayerPrefs.GetInt("KeyCircle", (int)KeyCode.A);
+        GameManager.KeyTriangle = (KeyCode)PlayerPrefs.GetInt("KeyTriangle", (int)KeyCode.S);
+        GameManager.KeySquare = (KeyCode)PlayerPrefs.GetInt("KeySquare", (int)KeyCode.D);
+
+        UpdateOptionsControlButtons();
     }
 
     // Update is called once per frame
@@ -105,6 +116,13 @@ public class UIMainMenu : MonoBehaviour
         _listenForKeyWithType = type;
     }
 
+    public void UpdateOptionsControlButtons()
+    {
+        ButtonKeyCircle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyCircle.ToString();
+        ButtonKeyTriangle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyTriangle.ToString();
+        ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeySquare.ToString();
+    }
+
     public void OnGUI()
     {
         Event e = Event.current;
@@ -115,17 +133,17 @@ public class UIMainMenu : MonoBehaviour
             {
                 case 1:
                     GameManager.KeyCircle = e.keyCode;
-                    ButtonKeyCircle.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
+                    PlayerPrefs.SetInt("KeyCircle", (int)e.keyCode);
                     break;
 
                 case 2:
-                    GameManager.KeyTriangle = e.keyCode;
-                    ButtonKeyTriangle.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
+                    GameManager.KeyTriangle = e.keyCode; 
+                    PlayerPrefs.SetInt("KeyTriangle", (int)e.keyCode);
                     break;
 
                 case 3:
                     GameManager.KeySquare = e.keyCode;
-                    ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
+                    PlayerPrefs.SetInt("KeySquare", (int)e.keyCode);
                     break;
 
                 default:
@@ -134,7 +152,7 @@ public class UIMainMenu : MonoBehaviour
 
             EventSystem.current.SetSelectedGameObject(null);
 
-            Debug.Log("Key set for " + _listenForKeyWithType + " to: " + e.keyCode);
+            UpdateOptionsControlButtons();
 
             _listenForKeyWithType = 0;
         }
