@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Highscores : MonoBehaviour
 {
-    public List<TextMeshProUGUI> LocalHighscoreLabels;
+    public List<NameValueLabels> LocalHighscoreLabels;
 
     public GameObject NewHighscoreArea;
     public TextMeshProUGUI NewHighScoreValueLabel;
@@ -55,21 +55,20 @@ public class Highscores : MonoBehaviour
         _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName1", ""));
         _localHighscoreNames.Add(PlayerPrefs.GetString("HighscoreName2", ""));
 
-        // Clear all local híghscores
-        LocalHighscoreLabels.ForEach(l => l.text = "");
 
         // Check just in case
         if (LocalHighscoreLabels != null)
         {
-            for (int i = 0; i < _localHighscoreValues.Count; i++)
+            for (int i = 0; i < LocalHighscoreLabels.Count; i++)
             {
-                if (LocalHighscoreLabels.Count > i && _localHighscoreValues[i] != -1 && _localHighscoreNames[i] != "")
+                if (_localHighscoreValues[i] != -1 && _localHighscoreNames[i] != "")
                 {
-                    int nameLength = _localHighscoreNames[i].Length;
-                    int valueLength = _localHighscoreValues[i].ToString().Length;
-
-                    // Minimum of one space
-                    LocalHighscoreLabels[i].text = _localHighscoreNames[i] + new string(' ', Mathf.Max(1, 40 - nameLength - valueLength)) + _localHighscoreValues[i];
+                    LocalHighscoreLabels[i].UpdateLables(_localHighscoreNames[i], _localHighscoreValues[i].ToString());
+                }
+                else
+                {
+                    // Clear Highscore
+                    LocalHighscoreLabels[i].UpdateLables("", "");
                 }
             }
         }
