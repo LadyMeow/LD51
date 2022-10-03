@@ -56,6 +56,8 @@ public class UIMainMenu : MonoBehaviour
             CanvasHighscores.gameObject.SetActive(true);
         }
 
+        // Rest after Run
+        Cursor.visible = true;
 
         UpdateOptionsControlButtons();
     }

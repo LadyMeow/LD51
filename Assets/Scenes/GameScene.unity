@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &321515099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 517451602, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
+  m_PrefabInstance: {fileID: 5312351048135203805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &401663393
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +580,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &868129551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 979944887, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
+  m_PrefabInstance: {fileID: 5312351048135203805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1486217725
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +634,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1768035726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 691333073, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
+  m_PrefabInstance: {fileID: 5312351048135203805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134162529
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +686,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CursorSprite: {fileID: 705280174}
   ScoreLabel: {fileID: 409090709}
+  HUDCircle: {fileID: 868129551}
+  HUDTriangle: {fileID: 1768035726}
+  HUDSquare: {fileID: 321515099}
 --- !u!4 &2134162532
 Transform:
   m_ObjectHideFlags: 0
@@ -693,6 +711,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1656665310, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656665310, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5312351048691737658, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
       propertyPath: m_Pivot.x
       value: 0

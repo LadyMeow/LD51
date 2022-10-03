@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
                                                                                                     { WasteTypes.TRIANGLE, new Color(0.325f, 1, 0.294f, 1) },
                                                                                                     { WasteTypes.SQUARE, new Color(1, 0, 0.8f, 1) }};
 
-    private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
-
     public enum WasteTypes
     {
         NONE,
@@ -35,8 +33,19 @@ public class GameManager : MonoBehaviour
     public SpriteRenderer CursorSprite;
     public TextMeshProUGUI ScoreLabel;
 
+    public GameObject HUDCircle;
+    public GameObject HUDTriangle;
+    public GameObject HUDSquare;
+
+    private Image _HUDCircleImage;
+    private Image _HUDTriangleImage;
+    private Image _HUDSquareImage;
+
     private TimeManager _timer;
     private WasteTypes _activeType;
+
+    private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +53,8 @@ public class GameManager : MonoBehaviour
         Score = 0; // Reset Score
 
         _timer = GetComponent<TimeManager>();
+
+        Cursor.visible = false;
 
         Color.RGBToHSV(WasteColors[WasteTypes.CIRCLE], out float h, out float s, out float v);
         WasteColorsLowGloom[WasteTypes.CIRCLE] = Color.HSVToRGB(h, s, v * 0.75f);
@@ -53,6 +64,14 @@ public class GameManager : MonoBehaviour
 
         Color.RGBToHSV(WasteColors[WasteTypes.SQUARE], out h, out s, out v);
         WasteColorsLowGloom[WasteTypes.SQUARE] = Color.HSVToRGB(h, s, v * 0.75f);
+
+        HUDCircle.GetComponentInChildren<TextMeshProUGUI>().text = KeyCircle.ToString();
+        HUDTriangle.GetComponentInChildren<TextMeshProUGUI>().text = KeyTriangle.ToString();
+        HUDSquare.GetComponentInChildren<TextMeshProUGUI>().text = KeySquare.ToString();
+
+        _HUDCircleImage = HUDCircle.GetComponent<Image>();
+        _HUDTriangleImage = HUDTriangle.GetComponent<Image>();
+        _HUDSquareImage = HUDSquare.GetComponent<Image>();
 
         UpdateScoreLabel();
     }
@@ -117,7 +136,9 @@ public class GameManager : MonoBehaviour
             _activeType = WasteTypes.NONE;
         }
 
- 
+
+        UpdateActiveWasteIcon();
+
         // MOVE all Waste objects
         foreach (var waste in SpawnManager.wasteObjects)
         {
@@ -127,7 +148,24 @@ public class GameManager : MonoBehaviour
 
     private void UpdateActiveWasteIcon()
     {
+        _HUDCircleImage.color = WasteColorsLowGloom[WasteTypes.CIRCLE];
+        _HUDTriangleImage.color = WasteColorsLowGloom[WasteTypes.TRIANGLE];
+        _HUDSquareImage.color = WasteColorsLowGloom[WasteTypes.SQUARE];
 
+        switch (_activeType)
+        {
+            case WasteTypes.CIRCLE:
+                _HUDCircleImage.color = WasteColors[WasteTypes.CIRCLE];
+                break;
+
+            case WasteTypes.TRIANGLE:
+                _HUDTriangleImage.color = WasteColors[WasteTypes.TRIANGLE];
+                break;
+
+            case WasteTypes.SQUARE:
+                _HUDSquareImage.color = WasteColors[WasteTypes.SQUARE];
+                break;
+        }
     }
 
     private void UpdateScoreLabel()
