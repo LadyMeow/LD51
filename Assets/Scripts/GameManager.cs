@@ -46,12 +46,14 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
 
+    private AudioManager _audio;
 
     // Start is called before the first frame update
     void Start()
     {
         Score = 0; // Reset Score
 
+        _audio = GameObject.FindObjectOfType<AudioManager>();
         _timer = GetComponent<TimeManager>();
 
         Cursor.visible = false;
@@ -111,6 +113,7 @@ public class GameManager : MonoBehaviour
                     if (item.GetComponent<Waste>().type == _activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
                     {
                         itemsInReach.Add(item);
+                       
                     }
                 }
             }

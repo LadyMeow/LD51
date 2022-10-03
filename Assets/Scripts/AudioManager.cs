@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource MusicGame;
     public AudioSource MusicIntro;
+    public AudioSource CollectSound;
+    public AudioSource NewHighscoreSound;
 
     public static AudioManager Instance
     {
@@ -30,6 +32,8 @@ public class AudioManager : MonoBehaviour
         }
 
         Volume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        MusicGame.volume = Volume;
+        CollectSound.volume = Volume;
 
         DontDestroyOnLoad(((this.gameObject)));
     }
@@ -38,6 +42,8 @@ public class AudioManager : MonoBehaviour
     {
         Volume = volume;
         PlayerPrefs.SetFloat("MasterVolume", volume);
+        MusicGame.volume = Volume;
+        CollectSound.volume = Volume;
     }
 
     public void SwitchToIntroMode()
@@ -86,4 +92,10 @@ public class AudioManager : MonoBehaviour
 
         source.volume = 1f;
     }
+
+    public void playCollect()
+    {
+        CollectSound.Play();
+    }
 }
+
