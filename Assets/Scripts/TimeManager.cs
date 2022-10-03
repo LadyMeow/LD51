@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
     public float MaxRunTimeInSeconds = 10;
-    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI TimeText;
+    public Slider ProgressBar;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        ProgressBar.maxValue = MaxRunTimeInSeconds;
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class TimeManager : MonoBehaviour
         if (MaxRunTimeInSeconds > 0)
         {
             MaxRunTimeInSeconds -= Time.deltaTime;
+            ProgressBar.value = ProgressBar.maxValue - MaxRunTimeInSeconds;
         }
     }
 
