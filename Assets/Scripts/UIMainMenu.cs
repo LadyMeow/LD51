@@ -21,6 +21,7 @@ public class UIMainMenu : MonoBehaviour
     public GameObject ButtonKeyCircle;
     public GameObject ButtonKeyTriangle;
     public GameObject ButtonKeySquare;
+    public GameObject ButtonRestart;
     public Slider SliderVolume;
 
     // Could be in the Options Script but we need the check for the Escape Key here
@@ -49,6 +50,7 @@ public class UIMainMenu : MonoBehaviour
             GameManager.KeyCircle = (KeyCode)PlayerPrefs.GetInt("KeyCircle", (int)KeyCode.A);
             GameManager.KeyTriangle = (KeyCode)PlayerPrefs.GetInt("KeyTriangle", (int)KeyCode.S);
             GameManager.KeySquare = (KeyCode)PlayerPrefs.GetInt("KeySquare", (int)KeyCode.D);
+            GameManager.KeyRestart = (KeyCode)PlayerPrefs.GetInt("KeyRestart", (int)KeyCode.R);
         }
         else
         {
@@ -129,6 +131,7 @@ public class UIMainMenu : MonoBehaviour
     /// 1 ... Circle
     /// 2 ... Triangle
     /// 3 ... Square
+    /// 4 ... Restart
     /// </summary>
     /// <param name="type"></param>
     public void StartChangeButton(int type)
@@ -141,6 +144,7 @@ public class UIMainMenu : MonoBehaviour
         ButtonKeyCircle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyCircle.ToString();
         ButtonKeyTriangle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyTriangle.ToString();
         ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeySquare.ToString();
+        ButtonRestart.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyRestart.ToString();
 
         SliderVolume.value = AudioManager.Volume;
     }
@@ -172,6 +176,11 @@ public class UIMainMenu : MonoBehaviour
                 case 3:
                     GameManager.KeySquare = e.keyCode;
                     PlayerPrefs.SetInt("KeySquare", (int)e.keyCode);
+                    break;
+
+                case 4:
+                    GameManager.KeyRestart = e.keyCode;
+                    PlayerPrefs.SetInt("KeyRestart", (int)e.keyCode);
                     break;
 
                 default:

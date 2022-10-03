@@ -918,5 +918,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 7456870275934138544, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}
+      propertyPath: m_text
+      value: 'These keys activate proper recycling pipe.
+
+        But white is not
+        right!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456870275934138547, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456870275934138547, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456870275934138547, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -350
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}

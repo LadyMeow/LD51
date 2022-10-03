@@ -15,6 +15,8 @@ public class Highscores : MonoBehaviour
     public List<NameValueLabels> LocalHighscoreLabels;
 
     public GameObject NewHighscoreArea;
+    public GameObject NewHighscoreInputField;
+    public GameObject NewHighscoreSubmitButton;
     public TextMeshProUGUI NewHighScoreValueLabel;
 
     public GameObject GlobalLeaderboard;
@@ -43,8 +45,23 @@ public class Highscores : MonoBehaviour
         UpdateLocalHighscores();
         DownloadAndUpdateGlobalHighScoresAsync();
 
-        if (GameManager.Score > 0 && GameManager.Score > _localHighscoreValues.FirstOrDefault())
+        if (GameManager.Score > 0)
         {
+            var label = NewHighscoreArea.GetComponent<TextMeshProUGUI>();
+
+            if (GameManager.Score > _localHighscoreValues.FirstOrDefault())
+            {
+                label.text = "New Highscore:";
+                NewHighscoreInputField.SetActive(true);
+                NewHighscoreSubmitButton.SetActive(true);
+            }
+            else
+            {
+                label.text = "Last Score:";
+                NewHighscoreInputField.SetActive(false);
+                NewHighscoreSubmitButton.SetActive(false);
+            }
+
             NewHighScoreValueLabel.text = GameManager.Score.ToString();
             NewHighscoreArea.SetActive(true);
         }

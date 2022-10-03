@@ -159,6 +159,7 @@ MonoBehaviour:
   ButtonKeyCircle: {fileID: 1322420211}
   ButtonKeyTriangle: {fileID: 1766896083}
   ButtonKeySquare: {fileID: 485552645}
+  ButtonRestart: {fileID: 1147407660}
   SliderVolume: {fileID: 595237442}
 --- !u!4 &20105434
 Transform:
@@ -681,6 +682,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1147407660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1147407660, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+  m_PrefabInstance: {fileID: 1358668669887450161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1238680997
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +819,14 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 20105433}
+    - target: {fileID: 1147407662, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 20105433}
+    - target: {fileID: 1147407662, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1276497343, guid: 3ab4f21970563e34f8418cd9c69caadc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1104,26 +1118,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 318225444, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 318225444, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 318225444, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: 1307481169, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1307481169, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6046904319069652415, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1131,10 +1125,6 @@ PrefabInstance:
     - target: {fileID: 6046904320207994505, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
       propertyPath: m_Name
       value: CanvasHighscore
-      objectReference: {fileID: 0}
-    - target: {fileID: 6046904320207994505, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6046904320207994509, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
       propertyPath: m_Pivot.x

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static KeyCode KeyCircle = KeyCode.A;
     public static KeyCode KeyTriangle = KeyCode.S;
     public static KeyCode KeySquare = KeyCode.D;
+    public static KeyCode KeyRestart = KeyCode.R;
 
     public static Dictionary<WasteTypes, Color> WasteColors = new Dictionary<WasteTypes, Color>() { { WasteTypes.CIRCLE, new Color(0.071f, 0.651f, 0.988f, 1) },
                                                                                                     { WasteTypes.TRIANGLE, new Color(0.325f, 1, 0.294f, 1) },
@@ -103,6 +104,11 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
 
             // Move Cursor Sprite to 
             // Camera and Mouse are in Screen Space and we need to convert the position to World Space
