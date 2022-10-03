@@ -88,7 +88,28 @@ public class Highscores : MonoBehaviour
 
     public void UpdateGlobalHighscores()
     {
+        // Clear old highscores
+        var oldHighscores = GlobalLeaderboardContent.GetComponentsInChildren<NameValueLabels>().ToList();
+        oldHighscores.ForEach(o => Destroy(o.gameObject));
 
+        var label = GlobalLeaderboard.GetComponent<TextMeshProUGUI>();  
+
+        if (_scoreList != null && _scoreList.Any())
+        {
+            GlobalLeaderboard.transform.GetChild(0).gameObject.SetActive(true);
+            label.text = "GLobal Leaderboard:";
+
+            foreach (var score in _scoreList)
+            {
+                GameObject newHighscore = Instantiate(HighscorePrefab, GlobalLeaderboardContent.transform);
+                newHighscore.GetComponent<NameValueLabels>().UpdateLables(score.Name, score.Score.ToString());
+            }
+        }
+        else
+        {
+            GlobalLeaderboard.transform.GetChild(0).gameObject.SetActive(false);
+            label.text = "GLobal Leaderboard:\nNo result!";
+        }
     }
 
     public void StoreLocalHighscore(int localHighscore, string name)
@@ -157,6 +178,7 @@ public class Highscores : MonoBehaviour
 
     public void DownloadAndUpdateGlobalHighScoresAsync()
     {
+        _scoreList.Clear();
         StartCoroutine(DatabaseDownload());
     }
 
@@ -168,7 +190,7 @@ public class Highscores : MonoBehaviour
 
         if (string.IsNullOrEmpty(www.error))
         {
-            OrganizeInfo(www.downloadHandler.text);
+            ProcessLeaderboardText(www.downloadHandler.text);
             UpdateGlobalHighscores();
         }
         else
@@ -177,7 +199,7 @@ public class Highscores : MonoBehaviour
         }
     }
 
-    void OrganizeInfo(string rawData) //Divides Scoreboard info by new lines
+    private void ProcessLeaderboardText(string rawData) //Divides Scoreboard info by new lines
     {
         string[] entries = rawData.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         _scoreList.Clear();

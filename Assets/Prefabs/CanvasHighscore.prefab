@@ -2166,6 +2166,7 @@ MonoBehaviour:
   NewHighScoreValueLabel: {fileID: 1862175099}
   GlobalLeaderboard: {fileID: 344719926}
   GlobalLeaderboardContent: {fileID: 721608967}
+  HighscorePrefab: {fileID: 3175053055681131942, guid: bc16047b760d5864e9f62edeee330cbe, type: 3}
 --- !u!1001 &2758575572503962249
 PrefabInstance:
   m_ObjectHideFlags: 0
