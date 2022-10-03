@@ -4,18 +4,27 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Highscores : MonoBehaviour
 {
+    const string privateCode = "zc4hDLkjnkqJQu2jgliz_AJUTNhmKnNU6hdBhyZaw80A";  //Key to Upload New Info
+    const string publicCode = "63399bad8f40bc0fe88fdb6c";   //Key to download
+    const string webURL = "http://dreamlo.com/lb/"; //  Website the keys are for
+
     public List<NameValueLabels> LocalHighscoreLabels;
 
     public GameObject NewHighscoreArea;
     public TextMeshProUGUI NewHighScoreValueLabel;
 
+    public GameObject GlobalLeaderboard;
     public GameObject GlobalLeaderboardContent;
+    public GameObject HighscorePrefab;
 
     private List<int> _localHighscoreValues = new List<int>();
     private List<string> _localHighscoreNames = new List<string>();
+
+    private List<PlayerScore> _scoreList;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +41,7 @@ public class Highscores : MonoBehaviour
     private void OnEnable()
     {
         UpdateLocalHighscores();
+        DownloadAndUpdateGlobalHighScoresAsync();
 
         if (GameManager.Score > 0 && GameManager.Score > _localHighscoreValues.FirstOrDefault())
         {
@@ -76,6 +86,11 @@ public class Highscores : MonoBehaviour
         }
     }
 
+    public void UpdateGlobalHighscores()
+    {
+
+    }
+
     public void StoreLocalHighscore(int localHighscore, string name)
     {
         if (localHighscore > _localHighscoreValues[0])
@@ -118,8 +133,74 @@ public class Highscores : MonoBehaviour
             StoreLocalHighscore(GameManager.Score, input.text);
             GameManager.Score = 0;
             UpdateLocalHighscores();
+            StartCoroutine(DatabaseUpload(input.text, GameManager.Score));
 
             NewHighscoreArea.SetActive(false);
+        }
+    }
+
+    IEnumerator DatabaseUpload(string userame, int score) //Called when sending new score to Website
+    {
+        UnityWebRequest www = new UnityWebRequest(webURL + privateCode + "/add/" + UnityWebRequest.EscapeURL(userame) + "/" + score);
+        yield return www;
+
+        if (string.IsNullOrEmpty(www.error))
+        {
+            print("Upload Successful");
+            DownloadAndUpdateGlobalHighScoresAsync();
+        }
+        else
+        {
+            print("Error uploading" + www.error);
+        }
+    }
+
+    public void DownloadAndUpdateGlobalHighScoresAsync()
+    {
+        StartCoroutine(DatabaseDownload());
+    }
+
+    IEnumerator DatabaseDownload()
+    {
+        //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list  - "/pipe/0/10" //Gets top 10
+        UnityWebRequest www = new UnityWebRequest(webURL + publicCode + "/pipe/"); 
+        yield return www;
+
+        if (string.IsNullOrEmpty(www.error))
+        {
+            OrganizeInfo(www.downloadHandler.text);
+            UpdateGlobalHighscores();
+        }
+        else
+        {
+            print("Error uploading" + www.error);
+        }
+    }
+
+    void OrganizeInfo(string rawData) //Divides Scoreboard info by new lines
+    {
+        string[] entries = rawData.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        _scoreList.Clear();
+        for (int i = 0; i < entries.Length; i++) //For each entry in the string array
+        {
+            string[] entryInfo = entries[i].Split(new char[] { '|' });
+            string username = entryInfo[0];
+            int score = int.Parse(entryInfo[1]);
+
+            _scoreList.Add(new PlayerScore(username, score));
+            print(_scoreList[i].Name + ": " + _scoreList[i].Score);
+        }
+    }
+
+    public struct PlayerScore //Creates place to store the variables for the name and score of each player
+    {
+        public string Name;
+        public int Score;
+
+        public PlayerScore(string _username, int _score)
+        {
+            Name = _username;
+            Score = _score;
         }
     }
 }
