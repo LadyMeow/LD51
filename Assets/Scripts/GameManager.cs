@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
-            else if (Input.GetKeyDown(KeyCode.R))
+            else if (Input.GetKeyDown(KeyRestart))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
