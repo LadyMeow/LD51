@@ -185,7 +185,7 @@ public class Highscores : MonoBehaviour
     IEnumerator DatabaseDownload()
     {
         //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list  - "/pipe/0/10" //Gets top 10
-        UnityWebRequest www = new UnityWebRequest(webURL + publicCode + "/pipe/"); 
+        UnityWebRequest www = UnityWebRequest.Get(webURL + publicCode + "/pipe/"); 
         yield return www.SendWebRequest();
 
         if (string.IsNullOrEmpty(www.error))
