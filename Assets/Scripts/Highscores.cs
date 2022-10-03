@@ -24,7 +24,7 @@ public class Highscores : MonoBehaviour
     private List<int> _localHighscoreValues = new List<int>();
     private List<string> _localHighscoreNames = new List<string>();
 
-    private List<PlayerScore> _scoreList;
+    private List<PlayerScore> _scoreList = new List<PlayerScore>();
 
     // Start is called before the first frame update
     void Start()
@@ -152,9 +152,9 @@ public class Highscores : MonoBehaviour
         if (input != null)
         {
             StoreLocalHighscore(GameManager.Score, input.text);
+            StartCoroutine(DatabaseUpload(input.text, GameManager.Score));
             GameManager.Score = 0;
             UpdateLocalHighscores();
-            StartCoroutine(DatabaseUpload(input.text, GameManager.Score));
 
             NewHighscoreArea.SetActive(false);
         }
@@ -163,7 +163,7 @@ public class Highscores : MonoBehaviour
     IEnumerator DatabaseUpload(string userame, int score) //Called when sending new score to Website
     {
         UnityWebRequest www = new UnityWebRequest(webURL + privateCode + "/add/" + UnityWebRequest.EscapeURL(userame) + "/" + score);
-        yield return www;
+        yield return www.SendWebRequest();
 
         if (string.IsNullOrEmpty(www.error))
         {
@@ -186,11 +186,11 @@ public class Highscores : MonoBehaviour
     {
         //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list  - "/pipe/0/10" //Gets top 10
         UnityWebRequest www = new UnityWebRequest(webURL + publicCode + "/pipe/"); 
-        yield return www;
+        yield return www.SendWebRequest();
 
         if (string.IsNullOrEmpty(www.error))
         {
-            ProcessLeaderboardText(www.downloadHandler.text);
+            ProcessLeaderboardText(www.downloadHandler?.text);
             UpdateGlobalHighscores();
         }
         else
@@ -201,16 +201,19 @@ public class Highscores : MonoBehaviour
 
     private void ProcessLeaderboardText(string rawData) //Divides Scoreboard info by new lines
     {
-        string[] entries = rawData.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-        _scoreList.Clear();
-        for (int i = 0; i < entries.Length; i++) //For each entry in the string array
+        if (!string.IsNullOrEmpty(rawData))
         {
-            string[] entryInfo = entries[i].Split(new char[] { '|' });
-            string username = entryInfo[0];
-            int score = int.Parse(entryInfo[1]);
+            string[] entries = rawData.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+            _scoreList.Clear();
+            for (int i = 0; i < entries.Length; i++) //For each entry in the string array
+            {
+                string[] entryInfo = entries[i].Split(new char[] { '|' });
+                string username = entryInfo[0];
+                int score = int.Parse(entryInfo[1]);
 
-            _scoreList.Add(new PlayerScore(username, score));
-            print(_scoreList[i].Name + ": " + _scoreList[i].Score);
+                _scoreList.Add(new PlayerScore(username, score));
+                print(_scoreList[i].Name + ": " + _scoreList[i].Score);
+            }
         }
     }
 
