@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -142,6 +143,12 @@ public class UIMainMenu : MonoBehaviour
         ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeySquare.ToString();
 
         SliderVolume.value = AudioManager.Volume;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        AudioManager.Volume = volume;
+        PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
     public void OnGUI()

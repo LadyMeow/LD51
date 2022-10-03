@@ -38,10 +38,8 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(((this.gameObject)));
     }
 
-    public void SetMasterVolume(float volume)
+    private void Update()
     {
-        Volume = volume;
-        PlayerPrefs.SetFloat("MasterVolume", volume);
         MusicGame.volume = Volume;
         CollectSound.volume = Volume;
     }
