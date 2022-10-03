@@ -1325,5 +1325,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasGarbagePile
       objectReference: {fileID: 0}
+    - target: {fileID: 7124636674855362243, guid: 636617338af0f85408d851bb0c0419f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 169
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124636674855362243, guid: 636617338af0f85408d851bb0c0419f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 164
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 636617338af0f85408d851bb0c0419f1, type: 3}
