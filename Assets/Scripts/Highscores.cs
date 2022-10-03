@@ -99,7 +99,7 @@ public class Highscores : MonoBehaviour
             GlobalLeaderboard.transform.GetChild(0).gameObject.SetActive(true);
             label.text = "GLobal Leaderboard:";
 
-            foreach (var score in _scoreList)
+            foreach (var score in _scoreList.Take(25))
             {
                 GameObject newHighscore = Instantiate(HighscorePrefab, GlobalLeaderboardContent.transform);
                 newHighscore.GetComponent<NameValueLabels>().UpdateLables(score.Name, score.Score.ToString());
