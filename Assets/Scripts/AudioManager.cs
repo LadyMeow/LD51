@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     private static AudioManager instance = null;
+    private static float _volume;
 
     public AudioSource MusicGame;
     public AudioSource MusicIntro;
-    public AudioMixer MainMixer;
 
     public static AudioManager Instance
     {
@@ -29,12 +29,15 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
 
+        _volume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+
         DontDestroyOnLoad(((this.gameObject)));
     }
 
     public void SetMasterVolume(float volume)
     {
-        MainMixer.SetFloat("MasterVolume", volume);
+        _volume = volume;
+        PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
     public void SwitchToIntroMode()
