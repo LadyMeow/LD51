@@ -12,6 +12,8 @@ public class Highscores : MonoBehaviour
     public GameObject NewHighscoreArea;
     public TextMeshProUGUI NewHighScoreValueLabel;
 
+    public GameObject GlobalLeaderboardContent;
+
     private List<int> _localHighscoreValues = new List<int>();
     private List<string> _localHighscoreNames = new List<string>();
 
