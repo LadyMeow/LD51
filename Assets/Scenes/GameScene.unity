@@ -639,6 +639,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 691333073, guid: 61e95d9a8dd69534da7c252100c2a093, type: 3}
   m_PrefabInstance: {fileID: 5312351048135203805}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &2113411241 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7456870274772553881, guid: 397bcfeeb1a0cb847815822b8f2f2ac3, type: 3}
+  m_PrefabInstance: {fileID: 7456870274948405934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134162529
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,9 +674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8654a19b8df4a984298936929cd3e48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRunTimeInSeconds: 10
   TimeText: {fileID: 0}
   ProgressBar: {fileID: 653200659}
+  ActiveRun: 0
 --- !u!114 &2134162531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,6 +694,7 @@ MonoBehaviour:
   HUDCircle: {fileID: 868129551}
   HUDTriangle: {fileID: 1768035726}
   HUDSquare: {fileID: 321515099}
+  CanvasTutorial: {fileID: 2113411241}
 --- !u!4 &2134162532
 Transform:
   m_ObjectHideFlags: 0

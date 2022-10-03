@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject HUDTriangle;
     public GameObject HUDSquare;
 
+    public Canvas CanvasTutorial;
+
     private Image _HUDCircleImage;
     private Image _HUDTriangleImage;
     private Image _HUDSquareImage;
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
 
     private AudioManager _audio;
+
+    private bool inTutorial = true;
 
     // Start is called before the first frame update
     void Start()
@@ -76,76 +80,89 @@ public class GameManager : MonoBehaviour
         _HUDSquareImage = HUDSquare.GetComponent<Image>();
 
         UpdateScoreLabel();
+
+        CanvasTutorial.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Run finished
-        if (_timer.MaxRunTimeInSeconds <= 0)
+        if (inTutorial)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        }
-
-        // Move Cursor Sprite to 
-        // Camera and Mouse are in Screen Space and we need to convert the position to World Space
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-        CursorSprite.transform.position = new Vector3(mousePosition.x, mousePosition.y, CursorSprite.transform.position.z);
-
-
-        if (Input.GetKeyDown(KeyCircle)) _activeType = WasteTypes.CIRCLE;
-        else if (Input.GetKeyDown(KeyTriangle)) _activeType = WasteTypes.TRIANGLE;
-        else if (Input.GetKeyDown(KeySquare)) _activeType = WasteTypes.SQUARE;
-
-        if ((_activeType == WasteTypes.CIRCLE && Input.GetKey(KeyCircle)) ||
-            (_activeType == WasteTypes.TRIANGLE && Input.GetKey(KeyTriangle)) ||
-            (_activeType == WasteTypes.SQUARE && Input.GetKey(KeySquare)))
-        {
-            // Update Cursor
-            CursorSprite.color = WasteColors[_activeType];
-
-            List<GameObject> itemsInReach = new List<GameObject>();
-
-            foreach (GameObject item in SpawnManager.wasteObjects)
+            if (Input.anyKeyDown)
             {
-                if (Vector3.Distance(mousePosition, item.transform.position) < 0.7)
-                {
-                    if (item.GetComponent<Waste>().type == _activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
-                    {
-                        itemsInReach.Add(item);
-                        _audio.playCollect();
-                    }
-                }
-            }
-
-            if (itemsInReach != null)
-            {
-                foreach (GameObject reachedItem in itemsInReach)
-                {
-                    Score += reachedItem.GetComponent<Waste>().value;
-
-                    UpdateScoreLabel();
-
-                    SpawnManager.wasteObjects.Remove(reachedItem);
-
-                    Destroy(reachedItem);
-                }
+                inTutorial = false;
+                _timer.StartRun();
             }
         }
         else
         {
-            // Reset
-            CursorSprite.color = new Color(0.8f, 0.8f, 0.8f);
-            _activeType = WasteTypes.NONE;
-        }
+            // Run finished
+            if (!_timer.ActiveRun)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            }
+
+            // Move Cursor Sprite to 
+            // Camera and Mouse are in Screen Space and we need to convert the position to World Space
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+            CursorSprite.transform.position = new Vector3(mousePosition.x, mousePosition.y, CursorSprite.transform.position.z);
 
 
-        UpdateActiveWasteIcon();
+            if (Input.GetKeyDown(KeyCircle)) _activeType = WasteTypes.CIRCLE;
+            else if (Input.GetKeyDown(KeyTriangle)) _activeType = WasteTypes.TRIANGLE;
+            else if (Input.GetKeyDown(KeySquare)) _activeType = WasteTypes.SQUARE;
 
-        // MOVE all Waste objects
-        foreach (var waste in SpawnManager.wasteObjects)
-        {
-            waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);
+            if ((_activeType == WasteTypes.CIRCLE && Input.GetKey(KeyCircle)) ||
+                (_activeType == WasteTypes.TRIANGLE && Input.GetKey(KeyTriangle)) ||
+                (_activeType == WasteTypes.SQUARE && Input.GetKey(KeySquare)))
+            {
+                // Update Cursor
+                CursorSprite.color = WasteColors[_activeType];
+
+                List<GameObject> itemsInReach = new List<GameObject>();
+
+                foreach (GameObject item in SpawnManager.wasteObjects)
+                {
+                    if (Vector3.Distance(mousePosition, item.transform.position) < 0.7)
+                    {
+                        if (item.GetComponent<Waste>().type == _activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
+                        {
+                            itemsInReach.Add(item);
+                            _audio.playCollect();
+                        }
+                    }
+                }
+
+                if (itemsInReach != null)
+                {
+                    foreach (GameObject reachedItem in itemsInReach)
+                    {
+                        Score += reachedItem.GetComponent<Waste>().value;
+
+                        UpdateScoreLabel();
+
+                        SpawnManager.wasteObjects.Remove(reachedItem);
+
+                        Destroy(reachedItem);
+                    }
+                }
+            }
+            else
+            {
+                // Reset
+                CursorSprite.color = new Color(0.8f, 0.8f, 0.8f);
+                _activeType = WasteTypes.NONE;
+            }
+
+
+            UpdateActiveWasteIcon();
+
+            // MOVE all Waste objects
+            foreach (var waste in SpawnManager.wasteObjects)
+            {
+                waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);
+            }
         }
     }
 
