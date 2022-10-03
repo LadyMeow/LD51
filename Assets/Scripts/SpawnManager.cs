@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private List<Vector3> randomPositions;
 
     private int XWasteFactor = 5;
-    private int GoodWasteSize = 20;
+    private float GoodWasteSize = 2.5f;
 
     public static List<GameObject> wasteObjects;
 
@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
 
         List<GameObject> tempWasteList = new List<GameObject>();
 
-        for (int i = 0; i < GoodWasteSize; i++)
+        for (int i = 0; i < Mathf.RoundToInt(GoodWasteSize * GameManager.FallingSpeed); i++)
         {
             for (int j = 0; j <= 3; j++)
             {
@@ -41,8 +41,8 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        float Xmin = -9f;
-        float Xmax = 9f;
+        float Xmin = -7.5f;
+        float Xmax = 7.5f;
         float Ymin = 5.5f;
         float Ymax = 6.5f;
         int count = tempWasteList.Count;
@@ -55,7 +55,7 @@ public class SpawnManager : MonoBehaviour
 
             while (!posSet)
             {
-                Vector3 pos = new Vector3(Random.Range(Xmin, Xmax), Random.Range(Ymin, Ymax) + (i * GameManager.FallingSpeed / 10), 0);
+                Vector3 pos = new Vector3(Random.Range(Xmin, Xmax), Random.Range(Ymin, Ymax) + (i / 2), 0);
 
                 bool notOccupied = wasteObjects.TakeLast(10).ToList().TrueForAll(w => Vector3.Distance(w.transform.position, pos) > 1);
 
