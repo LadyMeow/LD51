@@ -16,34 +16,43 @@ public class GameManager : MonoBehaviour
     public static KeyCode KeyCircle = KeyCode.A;
     public static KeyCode KeyTriangle = KeyCode.S;
     public static KeyCode KeySquare = KeyCode.D;
-    private WasteTypes activeType;
+
+    public static Dictionary<WasteTypes, Color> WasteColors = new Dictionary<WasteTypes, Color>() { { WasteTypes.CIRCLE, new Color(18, 155, 252) },
+                                                                                                    { WasteTypes.TRIANGLE, new Color(83, 255, 75) },
+                                                                                                    { WasteTypes.SQUARE, new Color(255, 0, 204) }};
+
+    private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
+
     public enum WasteTypes
     {
+        NONE,
         CIRCLE,
         TRIANGLE,
         SQUARE,
         XWASTE
     }
 
-    public Texture2D cursor;
-    public Texture2D cursorGlow;
-
+    public SpriteRenderer CursorSprite;
     public TextMeshProUGUI ScoreLabel;
 
-
-    private float _glowTime = 0f;
-    private float _maxGlowTime = 0.08f;
-
-    private TimeManager timer;
+    private TimeManager _timer;
+    private WasteTypes _activeType;
 
     // Start is called before the first frame update
     void Start()
     {
         Score = 0; // Reset Score
 
-        timer = GetComponent<TimeManager>();
+        _timer = GetComponent<TimeManager>();
 
-        Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+        Color.RGBToHSV(WasteColors[WasteTypes.CIRCLE], out float h, out float s, out float v);
+        WasteColorsLowGloom[WasteTypes.CIRCLE] = Color.HSVToRGB(h, s, v * 0.75f);
+
+        Color.RGBToHSV(WasteColors[WasteTypes.TRIANGLE], out h, out s, out v);
+        WasteColorsLowGloom[WasteTypes.TRIANGLE] = Color.HSVToRGB(h, s, v * 0.75f);
+
+        Color.RGBToHSV(WasteColors[WasteTypes.SQUARE], out h, out s, out v);
+        WasteColorsLowGloom[WasteTypes.SQUARE] = Color.HSVToRGB(h, s, v * 0.75f);
 
         UpdateScoreLabel();
     }
@@ -52,25 +61,35 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // Run finished
-        if (timer.MaxRunTimeInSeconds <= 0)
+        if (_timer.MaxRunTimeInSeconds <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            Cursor.SetCursor(cursorGlow, new Vector3(92, 92, 0), CursorMode.ForceSoftware);
+        // Move Cursor Sprite to 
+        // Camera and Mouse are in Screen Space and we need to convert the position to World Space
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+        CursorSprite.transform.position = new Vector3(mousePosition.x, mousePosition.y, CursorSprite.transform.position.z);
 
-            // if color selection ?
+
+        if (Input.GetKeyDown(KeyCircle)) _activeType = WasteTypes.CIRCLE;
+        else if (Input.GetKeyDown(KeyTriangle)) _activeType = WasteTypes.TRIANGLE;
+        else if (Input.GetKeyDown(KeySquare)) _activeType = WasteTypes.SQUARE;
+
+        if (_activeType == WasteTypes.CIRCLE && Input.GetKey(KeyCircle) ||
+            _activeType == WasteTypes.TRIANGLE && Input.GetKey(KeyTriangle) ||
+            _activeType == WasteTypes.SQUARE && Input.GetKey(KeySquare))
+        {
+            // Update Cursor
+            CursorSprite.color = WasteColors[_activeType];
 
             List<GameObject> itemsInReach = new List<GameObject>();
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
             foreach (GameObject item in SpawnManager.wasteObjects)
             {
                 if (Vector3.Distance(mousePosition, item.transform.position) < 0.7)
                 {
-                    if (item.GetComponent<Waste>().type == activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
+                    if (item.GetComponent<Waste>().type == _activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
                     {
                         itemsInReach.Add(item);
                     }
@@ -81,8 +100,6 @@ public class GameManager : MonoBehaviour
             {
                 foreach (GameObject reachedItem in itemsInReach)
                 {
-                    _glowTime = _maxGlowTime;
-
                     Score += reachedItem.GetComponent<Waste>().value;
 
                     UpdateScoreLabel();
@@ -95,28 +112,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Cursor.SetCursor(cursor, new Vector3(64, 64, 0), CursorMode.ForceSoftware);
+            // Reset
+            CursorSprite.color = new Color(200, 200, 200);
+            _activeType = WasteTypes.NONE;
         }
 
-        // KEY STATUS - ACTIVE TYPE
-        if (Input.GetKeyDown(KeyCircle))
-        {
-            activeType = WasteTypes.CIRCLE;
-        }
-        if (Input.GetKeyDown(KeySquare))
-        {
-            activeType = WasteTypes.SQUARE;
-        }
-        if (Input.GetKeyDown(KeyTriangle))
-        {
-            activeType = WasteTypes.TRIANGLE;
-        }
-
-        // MOVEMENT
+        // MOVE all Waste objects
         foreach (var waste in SpawnManager.wasteObjects)
         {
             waste.transform.position = new Vector3(waste.transform.position.x, waste.transform.position.y - (FallingSpeed * Time.deltaTime), waste.transform.position.z);
         }
+    }
+
+    private void UpdateActiveWasteIcon()
+    {
+
     }
 
     private void UpdateScoreLabel()
