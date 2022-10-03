@@ -20,6 +20,7 @@ public class UIMainMenu : MonoBehaviour
     public GameObject ButtonKeyCircle;
     public GameObject ButtonKeyTriangle;
     public GameObject ButtonKeySquare;
+    public Slider SliderVolume;
 
     // Could be in the Options Script but we need the check for the Escape Key here
     private int _listenForKeyWithType = 0;
@@ -59,7 +60,7 @@ public class UIMainMenu : MonoBehaviour
         // Rest after Run
         Cursor.visible = true;
 
-        UpdateOptionsControlButtons();
+        UpdateOptionsControls();
     }
 
     // Update is called once per frame
@@ -134,11 +135,13 @@ public class UIMainMenu : MonoBehaviour
         _listenForKeyWithType = type;
     }
 
-    public void UpdateOptionsControlButtons()
+    public void UpdateOptionsControls()
     {
         ButtonKeyCircle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyCircle.ToString();
         ButtonKeyTriangle.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeyTriangle.ToString();
         ButtonKeySquare.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.KeySquare.ToString();
+
+        SliderVolume.value = AudioManager.Volume;
     }
 
     public void OnGUI()
@@ -170,7 +173,7 @@ public class UIMainMenu : MonoBehaviour
 
             EventSystem.current.SetSelectedGameObject(null);
 
-            UpdateOptionsControlButtons();
+            UpdateOptionsControls();
 
             _listenForKeyWithType = 0;
         }
