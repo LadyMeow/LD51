@@ -1100,6 +1100,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721608968, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.005556233
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307481169, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307481169, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307481169, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081697059, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
+      propertyPath: m_HorizontalScrollbar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6046904319069652415, guid: eb349e0e6b8ddb641930c4056269f416, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
