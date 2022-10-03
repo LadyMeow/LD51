@@ -90,7 +90,6 @@ public class UIMainMenu : MonoBehaviour
     {
         // Go to next scene in Build Order
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("Start Button here!");
     }
 
     public void ButtonHighscoresClick()

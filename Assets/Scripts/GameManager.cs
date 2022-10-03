@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     public static KeyCode KeyTriangle = KeyCode.S;
     public static KeyCode KeySquare = KeyCode.D;
 
-    public static Dictionary<WasteTypes, Color> WasteColors = new Dictionary<WasteTypes, Color>() { { WasteTypes.CIRCLE, new Color(18, 155, 252) },
-                                                                                                    { WasteTypes.TRIANGLE, new Color(83, 255, 75) },
-                                                                                                    { WasteTypes.SQUARE, new Color(255, 0, 204) }};
+    public static Dictionary<WasteTypes, Color> WasteColors = new Dictionary<WasteTypes, Color>() { { WasteTypes.CIRCLE, new Color(0.071f, 0.651f, 0.988f, 1) },
+                                                                                                    { WasteTypes.TRIANGLE, new Color(0.325f, 1, 0.294f, 1) },
+                                                                                                    { WasteTypes.SQUARE, new Color(1, 0, 0.8f, 1) }};
 
     private Dictionary<WasteTypes, Color> WasteColorsLowGloom = new Dictionary<WasteTypes, Color>();
 
@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyTriangle)) _activeType = WasteTypes.TRIANGLE;
         else if (Input.GetKeyDown(KeySquare)) _activeType = WasteTypes.SQUARE;
 
-        if (_activeType == WasteTypes.CIRCLE && Input.GetKey(KeyCircle) ||
-            _activeType == WasteTypes.TRIANGLE && Input.GetKey(KeyTriangle) ||
-            _activeType == WasteTypes.SQUARE && Input.GetKey(KeySquare))
+        if ((_activeType == WasteTypes.CIRCLE && Input.GetKey(KeyCircle)) ||
+            (_activeType == WasteTypes.TRIANGLE && Input.GetKey(KeyTriangle)) ||
+            (_activeType == WasteTypes.SQUARE && Input.GetKey(KeySquare)))
         {
             // Update Cursor
             CursorSprite.color = WasteColors[_activeType];
@@ -113,10 +113,11 @@ public class GameManager : MonoBehaviour
         else
         {
             // Reset
-            CursorSprite.color = new Color(200, 200, 200);
+            CursorSprite.color = new Color(0.8f, 0.8f, 0.8f);
             _activeType = WasteTypes.NONE;
         }
 
+ 
         // MOVE all Waste objects
         foreach (var waste in SpawnManager.wasteObjects)
         {
