@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
                     if (item.GetComponent<Waste>().type == _activeType || item.GetComponent<Waste>().type == WasteTypes.XWASTE)
                     {
                         itemsInReach.Add(item);
-                       
+                        _audio.playCollect();
                     }
                 }
             }
