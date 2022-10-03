@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
+                CanvasTutorial.gameObject.SetActive(false);
                 inTutorial = false;
                 _timer.StartRun();
             }
